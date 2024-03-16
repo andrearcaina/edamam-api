@@ -1,3 +1,7 @@
+## Edamam API Showcase
+
+This project is built to showcase how to fetch data from Edamam Recipes API and build a frontend for it.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
