@@ -1,5 +1,6 @@
 async function fetchRecipes(recipe, cuisineType, mealType) {
     const baseURL = "https://api.edamam.com/api/recipes/v2";
+    // get env keys
     const APP_ID = process.env.APP_ID;
     const APP_KEY = process.env.APP_KEY;
 
