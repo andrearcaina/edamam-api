@@ -9,7 +9,7 @@ export default function Form({ formSubmit }) {
         try {
             const response = await fetch(`api/search?recipe=${recipe}&cuisineType=${cuisineType}&mealType=${mealType}`);
             const data = await response.json();
-            formSubmit(data.body);
+            formSubmit(data);
         } catch (err) {
             console.error("Couldn't fetch recipe API data", err);
         }
