@@ -1,16 +1,15 @@
 import { useState } from 'react';
 
 export default function Form({ formSubmit }) {
-    const [query, setQuery] = useState('');
+    const [recipe, setRecipe] = useState('');
     const [cuisineType, setCuisineType] = useState('');
     const [mealType, setMealType] = useState('');
-    const baseURL = "https://api.edamam.com/api/recipes/v2";
-
-    const fetchRecipes = async () => {
+    
+    const fetchData = async () => {
         try {
-            const response = await fetch(`${baseURL}?type=public&q=${query}&app_id=${process.env.NEXT_PUBLIC_APP_ID}&app_key=${process.env.NEXT_PUBLIC_APP_KEY}&ingr=4-20&cuisineType=${cuisineType}&mealType=${mealType}&imageSize=REGULAR`);
+            const response = await fetch(`api/search?recipe=${recipe}&cuisineType=${cuisineType}&mealType=${mealType}`);
             const data = await response.json();
-            formSubmit(data);
+            formSubmit(data.body);
         } catch (err) {
             console.error("Couldn't fetch recipe API data", err);
         }
@@ -18,15 +17,15 @@ export default function Form({ formSubmit }) {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        fetchRecipes();
+        fetchData();
     };
 
     return (
         <form onSubmit={handleSearch} className="max-w-md mx-auto mt-8 p-4 bg-gray-100 rounded-lg shadow-lg">
             <input
                 type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                value={recipe}
+                onChange={(e) => setRecipe(e.target.value)}
                 placeholder="Search for recipes..."
                 className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
             />
