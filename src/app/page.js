@@ -1,29 +1,22 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Form, DisplayRecipes } from '@/components';
 
-export default function Home() {
-    const [getSearch, setSearch] = useState([]);
-    const baseURL = "https://api.edamam.com/api/recipes/v2";
+export default function API_Showcase() {
+    const [fetchData, setData] = useState([]);
 
-    useEffect(() => {
-        fetchRecipeData();
-    }, []);
-
-    const fetchRecipeData = async () => {
-        try {
-            const response = await fetch(`${baseURL}?type=public&q=chicken&app_id=${process.env.NEXT_PUBLIC_APP_ID}&app_key=${process.env.NEXT_PUBLIC_APP_KEY}&ingr=5-8&cuisineType=South%20American&imageSize=REGULAR`);
-            const data = await response.json();
-            setSearch(data);
-        } catch (err) {
-            console.error("couldn't fetch recipe api data", err);
-        }
+    const handleFormSubmit = (userInput) => {
+        setData(userInput);
     };
-
-    console.log(getSearch);
 
     return (
         <main>
-            hello
+            <h1 className="text-xl text-center mt-12 font-bold"> Edamam API Showcase </h1>
+
+            <Form formSubmit={handleFormSubmit} />
+
+            <DisplayRecipes Data={fetchData} />
         </main>
     );
 }
+
